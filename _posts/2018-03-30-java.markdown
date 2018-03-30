@@ -1,0 +1,173 @@
+---
+layout: post
+title: "java"
+date: 2018-03-30 10:27:27 +0800
+comments: true
+categories: [java]
+---
+
+
+
+java全局Fileter
+======================================================
+```java
+package tv.sciopovo.filter;
+
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.log4j.Logger;
+
+/**
+* @author duanxw
+* @date  2017/9/25.
+*/
+public class GlobalFilter implements Filter {
+    private static Logger log = LoggerFactory.getLogger(GlobalFilter.class);
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException {
+        String basePath = "/";
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        req.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        StringBuilder sb = new StringBuilder().append(req.getScheme()).append("://").append(req.getServerName());
+        if (req.getServerPort() != 80) {
+            sb.append(":").append(req.getServerPort());
+        }
+        sb.append(req.getContextPath());
+        sb.append("/");
+        basePath = sb.toString();
+        req.setAttribute("basePath", basePath);
+        doLog(req, basePath);
+        chain.doFilter(req, res);
+    }
+    @Override
+    public void destroy() {
+    }
+
+    private static final ThreadLocal<SimpleDateFormat> sdf = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
+    };
+
+    @SuppressWarnings("unchecked")
+    private void doLog(HttpServletRequest ai, String basePath) {
+        //获取请求界面的路径
+        String uri = ai.getRequestURI();
+        if(uri.contains(".") && !uri.contains(".do") && !uri.contains(".action")) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder("\nMyFilter action report -------- ")
+                .append(sdf.get().format(new Date())).append(" ------------------------------\n");
+        sb.append("Controller  : ").append(ai.getClass().getName()).append(".(")
+                .append(ai.getClass().getSimpleName()).append(".java:1)");
+        sb.append("\nreqPath     : ").append(basePath.substring(0, basePath.length() - 1) + ai.getServletPath());
+        sb.append("\nMethod      : ").append(ai.getMethod()).append("\n");
+
+        String urlParas = ai.getQueryString();
+        if (urlParas != null) {
+            sb.append("UrlPara     : ").append(urlParas).append("\n");
+        }
+
+        // print all parameters
+        Enumeration<String> e = ai.getParameterNames();
+        if (e.hasMoreElements()) {
+            sb.append("Parameter   : ");
+            while (e.hasMoreElements()) {
+                String name = e.nextElement();
+                String[] values = ai.getParameterValues(name);
+                if (values.length == 1) {
+                    sb.append(name).append("=").append(values[0]);
+                }
+                else {
+                    sb.append(name).append("[]={");
+                    for (int i=0; i<values.length; i++) {
+                        if (i > 0) {
+                            sb.append(",");
+                        }
+                        sb.append(values[i]);
+                    }
+                    sb.append("}");
+                }
+                sb.append("  ");
+            }
+            sb.append("\n");
+        }
+        sb.append("--------------------------------------------------------------------------------\n");
+        log.info(sb.toString());
+}
+```
+
+```
+页面获取：${requestScope.basePath}
+web.xml配置：
+<filter>
+	<filter-name>GlobalFilter</filter-name>
+	<filter-class>tv.sciopovo.filter.GlobalFilter</filter-class>
+</filter>
+
+<filter-mapping>
+	<filter-name>GlobalFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+
+强制杀死Java进程监听器
+=============================
+
+```java
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import java.io.IOException;
+
+/**
+ * @author duanxw
+ * @date 2018/3/11.
+ */
+public class ServletThreadListener implements ServletContextListener {
+
+    private static final String PLATFORM = System.getProperty("os.name");
+
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        System.out.println("销毁......");
+        String cmdStr = "ps -ef|grep java|grep -v grep|cut -c 9-15|xargs kill -9";
+        cmdStr = "sudo killall -9 java";
+        try {
+            if (PLATFORM.contains("Windows")) {
+                cmdStr = "taskkill /im java.exe /f";
+                Runtime.getRuntime().exec(cmdStr);
+            } else {
+                Runtime.getRuntime().exec(cmdStr);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+```
+
+```
+web.xml配置：
+<listener>
+    <listener-class>com.xxx.listener.ServletThreadListener</listener-class>
+</listener>
+```

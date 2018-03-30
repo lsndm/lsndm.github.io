@@ -1,0 +1,118 @@
+---
+layout: post
+title: "markdown"
+date: 2018-03-30 11:02:50 +0800
+comments: true
+categories: [markdown]
+---
+
+markdown语法说明：
+===========================
+![image](/images/markdownsheet.png)
+
+[markdown-syntax-cheat-sheet.pdf](http://alfred-sun.github.io/media/documents/markdown-syntax-cheat-sheet.pdf)
+
+[MarkDown轻量级标记语言.pdf](http://alfred-sun.github.io/media/documents/MarkDown%E8%BD%BB%E9%87%8F%E7%BA%A7%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80.pdf)
+
+
+表格
+=========================
+```
+表头1  | 表头2
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+| 表头1  | 表头2|
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+| 名字 | 描述          |
+| ------------- | ----------- |
+| Help      | Display the help window.|
+| Close     | Closes a window     |
+
+表格中也可以使用普通文本的删除线，斜体等效果
+
+| 名字 | 描述          |
+| ------------- | ----------- |
+| Help      | ~~Display the~~ help window.|
+| Close     | _Closes_ a window     |
+
+表格可以指定对齐方式
+
+| 左对齐 | 居中  | 右对齐 |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | $1600 |
+| col 2 is      | centered        |   $12 |
+| zebra stripes | are neat        |    $1 |
+```
+
+
+效果如下：
+===============================
+
+表头1  | 表头2
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+| 表头1  | 表头2|
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+| 名字 | 描述          |
+| ------------- | ----------- |
+| Help      | Display the help window.|
+| Close     | Closes a window     |
+
+表格中也可以使用普通文本的删除线，斜体等效果
+
+| 名字 | 描述          |
+| ------------- | ----------- |
+| Help      | ~~Display the~~ help window.|
+| Close     | _Closes_ a window     |
+
+表格可以指定对齐方式
+
+| 左对齐 | 居中  | 右对齐 |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | $1600 |
+| col 2 is      | centered        |   $12 |
+| zebra stripes | are neat        |    $1 |
+
+github 特有的特性
+=========================
+
+复选框列表
+---------------------------------
+
+### 在列表符号后面加上[]或者[x]代表选中或者未选中情况
+```
+* [x] C
+* [x] C++
+* [x] Java
+* [x] Qt
+* [x] Android
+* [ ] C#
+* [ ] .NET
+```
+
+效果如下
+==================
+
+* [x] C
+* [x] C++
+* [x] Java
+* [x] Qt
+* [x] Android
+* [ ] C#
+* [ ] .NET
+
+[Emoji表情](https://github.com/guodongxiaren/README/blob/master/emoji.md)
+
+[使用语法 PDF](/images/markdown-syntax-cheat-sheet.pdf)
+
+[MarkDown轻量级标记语言 PDF](/images/MarkDown轻量级标记语言.pdf)

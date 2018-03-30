@@ -1,0 +1,9 @@
+---
+layout: post
+title: "我的博客"
+date: 2015-12-21 12:54:26 +0800
+comments: true
+categories:
+---
+
+![image]({{ root_url }}/images/amors.jpg)
