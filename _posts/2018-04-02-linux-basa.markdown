@@ -56,10 +56,15 @@ zip压缩文件  |  zip -r aaa.zip aaa
 zip解压文件  |  unzip aaa.zip
 
 
-centos 6 与 centos 7区别
+centos 6 与 centos 7 与 ubuntu 区别
 =====================================
 
 操作  |  centos 6  |  centos 7  |  ubuntu  |
 -------------      | -------------           |-------------------         | ---------------|
+开启防火墙          |  service iptables start |  systemctl start firewalld |  sudo ufw enable && sudo ufw default deny |
 关闭防火墙          |  service iptables stop  |  systemctl stop firewalld  |  sudo ufw disable  |
-mysql开启自启动     | | systemctl enable mysqld && systemctl daemon-reload | |
+关闭防火墙自启动     |  chkconfig iptables off |  systemctl disable firewalld |   |
+mysql开启自启动     | ~~cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld <br> chmod +x /etc/init.d/mysqld  <br>   chkconfig --add mysql  <br>~~ rpm安装直接 chkconfig mysqld on     | systemctl enable mysqld && systemctl daemon-reload | dpkg安装默认自启动 |
+在线安装方式        |  yum install -y 软件名     |  yum install -y 软件名   |  sudo apt-get install 软件名  |
+离线安装方式        |  rpm -ivh \*\*\*.rpm      |  rpm -ivh \*\*\*.rpm      |  sudo dpkg -i \*\*\*.deb  |  
+查询是否安装        |  rpm -qa \| grep mysql     |  rpm -qa \| grep mysql     |  dpkg -l \| grep mysql   |
