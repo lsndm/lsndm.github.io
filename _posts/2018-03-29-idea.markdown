@@ -28,6 +28,21 @@ idea快捷键使用
 > #### 3. main方法: psvm
 >
 > #### 4. system.out: sout
+>
+> #### 5. 搜索路由：Ctrl + Shift + Alt + N
+> #### 6. 搜索文件名：Ctrl + Shift + R
+> #### 7. 搜索类名：Ctrl + Shift + T
+> #### 8. 切换内部tab页：Ctrl + F6
+> #### 9. 显示内容tap列表：Ctrl + Tab
+> #### 10. 格式化代码：Ctrl + Alt + L、 Ctrl + Shift + F
+> #### 11. 导包：Ctrl + Shift + O
+> #### 12. 重命名：Alt + Shift + R
+> #### 13. 定位到上次编辑的位置：Ctrl + Q
+> #### 14. 定位到某行：Ctrl + L
+> #### 15. 显示方法列表：Ctrl + O
+> #### 16. 跳转到类、变量的声明：F3
+> #### 16. 查找、替换：Ctrl + F
+> #### 16. 查找：Ctrl + H
 
 ***
 
