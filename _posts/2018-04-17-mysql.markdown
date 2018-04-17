@@ -1,0 +1,49 @@
+---
+layout: post
+title: "mysql查询总结"
+date: 2018-04-17 09:43:50 +0800
+comments: true
+categories: [mysql]
+---
+
+
+MySQL内部表达式
+=======================================
+
+时间格式化公式：DATE_FORMAT(date,format)
+日期格式化：DATE_FORMAT(date, '%Y-%m-%d')
+时间格式化：DATE_FORMAT(date, '%Y-%m-%d %H:%i:%s')
+
+
+
+
+MySQL 为日期增加一个时间间隔：date_add()
+
+NOW()       //now函数为获取当前时间
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 DAY); - 加1天
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 HOUR); -加1小时
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 MINUTE); - 加1分钟
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 SECOND); -加1秒
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 MICROSECOND);-加1毫秒
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 WEEK);-加1周
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH);-加1月
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 QUARTER);-加1季
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 YEAR);-加1年
+
+MySQL ADDDATE(), ADDTIME()函数，可以用DATE_ADD() 来替代。
+
+
+MySQL 为日期减去一个时间间隔：DATE_SUB()
+
+MySQL DATE_SUB() 日期时间函数 和DATE_ADD() 用法一致。
+
+MySQL 中SUBDATE(),SUBTIME()函数，建议，用DATE_SUB()来替代。
