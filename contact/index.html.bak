@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f2f2f2;
+        }
+
+        .header {
+            background: #222;
+            background-image: none;
+            background-size: auto auto;
+            background-repeat: no-repeat;
+            background-position: center 0;
+            -webkit-background-size: cover;
+            background-size: cover;
+            padding: 138px 0 0;
+            text-align: center;
+            min-height: 400px;
+            position: relative;
+        }
+
+        .logoimg {
+            position: absolute;
+            left: 1%;
+            right: 1%;
+            bottom: -34px;
+        }
+
+        a {
+            background-color: transparent;
+        }
+
+        .logotxt a {
+            font-weight: 700;
+            color: #d7e1d9;
+            font-size: 64px;
+        }
+
+        .header h2 {
+            color: #d7e1d9;
+            padding: 0;
+            margin: 0 0 45px;
+            font-weight: 100;
+            font-size: 34px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .site-name > span {
+            display: none;
+            margin-top: 6px;
+            font-size: 65%;
+        }
+
+        .img-icon {
+            height: 80px;
+            width: 80px;
+            font-size: 16px;
+            line-height: 100px;
+            /*display: block;*/
+            color: #0E2D5F;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 15%;
+            border: 1px solid #cdbfe3;
+            box-shadow: 2px 2px 5px #333333;
+        }
+
+        .main {
+            margin-top: 90px;;
+        }
+
+        .home-template .post, .archive-template .post {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 18px;
+            background-color: #fff;
+            -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .post-title {
+            position: absolute;
+            font-size: 24px;
+            z-index: 9;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            margin: 0;
+        }
+
+        .post-title a {
+            color: #777;
+        }
+
+        .post-featured-image {
+            position: relative;
+            padding-top: 62.5%;
+            overflow: hidden;
+        }
+
+        .post-featured-image .thumbnail {
+            margin-bottom: 0;
+            padding: 12px;
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border: none;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .thumbnail {
+            display: block;
+            padding: 4px;
+            margin-bottom: 20px;
+            line-height: 1.42857143;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            -webkit-transition: border .2s ease-in-out;
+            -o-transition: border .2s ease-in-out;
+            transition: border .2s ease-in-out;
+        }
+
+        .post-featured-image .thumbnail.loaded img {
+            opacity: 1;
+        }
+
+        .post-featured-image .thumbnail img {
+            opacity: 0;
+            -webkit-transition: opacity .5s;
+            -o-transition: opacity .5s;
+            transition: opacity .5s;
+        }
+
+        .post img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .thumbnail a > img, .thumbnail > img {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .pagination {
+            display: block;
+            position: relative;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            padding-left: 0;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .pagination > a.older-posts {
+            right: 10px;
+        }
+
+        .pagination > a {
+            border: 1px solid #39414a;
+            position: absolute;
+            top: -10px;
+            padding: 10px;
+            color: #39414a;
+            white-space: nowrap;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+
+        .main-footer {
+            background: #202020;
+            padding: 35px 0 0;
+            color: #959595;
+        }
+    </style>
+</head>
+<body class="home-template">
+<div class="header" style="background-image: url(../public/img/header.jpg)">
+    <div class="logoimg">
+        <a href="https://lsndm.github.io/" title="我的博客">
+            <img class="img-icon" src="../public/img/功夫熊猫.jpg" alt="刹那芳华">
+        </a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="logotxt"><h1><a href="https://lsndm.github.io/">Lsndm</a></h1></div>
+                <h2 class="site-name text-center">LOVE<span>https://lsndm.github.io/</span></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<main class="main">
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-xs-12 col-md-6"><img class="img-icon" style="width: 531px; height: 332px;" src="./public/img/功夫熊猫.jpg" alt="刹那芳华"></div>-->
+            <!--<div class="col-xs-12 col-md-6"><img class="img-icon" style="width: 531px; height: 332px;" src="./public/img/功夫熊猫.jpg" alt="刹那芳华"></div>-->
+            <div class="col-xs-12 col-md-6">
+                <article class="post tag-foreign-website tag-bootstrap-v3 tag-opensource-project">
+                    <h2 class="post-title">
+                        <a href="http://pearsearch.org/">PeARS</a>
+                    </h2>
+                    <div class="post-featured-image">
+                        <a class="thumbnail loaded" href="http://pearsearch.org/">
+                            <img src="../public/img/logo.jpg" width="700" height="438">
+                        </a>
+                    </div>
+                </article>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <article class="post tag-foreign-website tag-bootstrap-v3 tag-opensource-project">
+                    <h2 class="post-title">
+                        <a href="http://pearsearch.org/">PeARS</a>
+                    </h2>
+                    <div class="post-featured-image">
+                        <a class="thumbnail loaded" href="http://pearsearch.org/">
+                            <img src="../public/img/logo.jpg" width="700" height="438">
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <nav class="pagination">
+            <span class="page-number">第 1 页/共 89 页</span>
+            <a class="older-posts" href="/page/2/">下一页 →</a>
+        </nav>
+    </div>
+    </div>
+</main>
+<footer class="main-footer"></footer>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
