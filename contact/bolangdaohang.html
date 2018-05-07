@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>定屏条</title>
+	<style>
+		body{
+			margin: 0;
+			height: 2000px;
+		}
+		.toolbar{
+			width: 115px;
+			position: fixed;
+			top: 100px;
+			right: 0;
+		}
+		.toolbar ul{
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		.toolbar ul li{
+			background: #CCC;
+			line-height: 30px;
+			position: relative;
+			left: 85px;
+			border-bottom: 1px solid red;
+		}
+		.toolbar ul li span{
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			background: #ff002f36;
+			font-weight: bold;
+			text-align: center;
+		}
+        .toolbar ul li a:link{
+            color: #3C3C3C;
+            text-decoration: none;
+        }
+        .toolbar ul li a:visited{
+            color: #0000FF;
+            text-decoration: none;
+        }
+        .toolbar ul li a:hover{
+            color: #FF00FF;
+            text-decoration: none;
+        }
+        .toolbar ul li a:active{
+            color: black;
+            text-decoration: none;
+        }
+	</style>
+</head>
+  <body>
+  <div class="toolbar">
+	<ul>
+		<li><span>1</span> <a href="">Java</a></li>
+		<li><span>2</span> <a href="">python</a></li>
+		<li><span>3</span> <a href="">Javascript</a></li>
+		<li><span>4</span> <a href="">HTML5</a></li>
+		<li><span>5</span> <a href="">Bootstrap</a></li>
+		<li><span>6</span> <a href="">JQuery</a></li>
+	</ul>
+  </div>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	<script>
+		$(".toolbar ul").hover(function() {
+            $(".toolbar ul li").each(function(index, element) {
+                this.fn = function() {
+                    $(this).animate({left:'0'});
+                }
+                setTimeout(this.fn.bind(this), index * 50)
+            })
+            console.log("进来");
+        }, function() {
+            $(".toolbar ul li").each(function(index, element) {
+                setTimeout(function() {
+                    $(this).animate({left:'85px'});
+                }.bind(this), index * 50)
+            })
+            console.log("出去");
+        });
+	</script>
+  </body>
+</html>
