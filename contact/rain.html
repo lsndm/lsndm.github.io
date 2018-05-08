@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>canvas</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        /*border: 1px solid red;*/
+        /*height: 900px;*/
+      }
+      canvas {
+        display: block;
+        background-color: rgb(0, 0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="rain" class="rain"></canvas>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      var po = po || {};
+      var canvas = $("#rain");
+      // var canvas = document.querySelector(".rain");
+      // var canvas = document.getElementById("rain");
+      var canvasWidth, canvasHeight;
+      (function() {
+        window.onresize = arguments.callee;
+        //  dom对象设置宽高需要加px
+        // canvas.parentElement.style.height = window.innerHeight + "px";
+        // canvasWidth = canvas.parentNode.clientWidth - 30;
+        // canvasHeight = canvas.parentNode.clientHeight;
+        // canvas.width = canvasWidth;
+        // canvas.height = canvasHeight;
+        // jquery方式获取
+        $(".container").height($(window).innerHeight());
+        canvasWidth = canvas.parent(".container").width();
+        canvasHeight = canvas.parent(".container").height();
+        //  canvas的样式设置不能使用jQuery的width()方法和css()方法
+        canvas.attr({"width" : canvasWidth, "height" : canvasHeight});
+      }())
+      // ~~function setSize() {
+      //   window.onresize = arguments.callee;
+      //   canvasWidth = canvas.parent(".container").width();
+      //   canvasHeight = canvas.parent(".container").height();
+      //   canvas.attr({"width" : canvasWidth, "height" : canvasHeight});
+      // }()
+
+      // var ctx = canvas.getContext("2d");
+      var ctx = canvas.get(0).getContext("2d");
+
+      po.arrRain = [];
+
+      po.random = function(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      // 面向对象
+      po.Rain = function() {}
+
+      po.Rain.prototype = {
+        init: function() {
+          // x坐标
+          this.x = po.random(0, canvasWidth);
+          // y坐标
+          this.y = 30;
+          // 圆初始半径
+          this.r = 1;
+          // 画笔颜色
+          this.color = "#3ff";
+          // 下降速度
+          this.speed = po.random(1, 3);
+          // 落地高度
+          this.h = po.random(0.7 * canvasHeight, 0.8 * canvasHeight);
+          // 最大圆半径
+          this.maxR = po.random(40, 80);
+        },
+        draw: function() {
+          //  画图：当雨滴落到地上时则溅起水泡
+          if (this.y < this.h) {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, 2, 10);
+          } else {
+            //开始一个新的绘制路径
+            // ctx.beginPath();
+            //设置弧线的颜色为蓝色
+            // ctx.strokeStyle = "blue";
+            // var circle = {
+            //     x : 100,    //圆心的x轴坐标值
+            //     y : 100,    //圆心的y轴坐标值
+            //     r : 50      //圆的半径
+            // };
+            //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
+            // ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2);
+            //按照指定的路径绘制弧线
+            // ctx.stroke();
+            //  雨滴落地，重新抬笔画圆
+            ctx.beginPath();
+            ctx.strokeStyle = this.color;
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        },
+        move: function() {
+          //  改变y坐标或r半径，看起来像动画效果
+          if (this.y < this.h) {
+            this.y += this.speed;
+          } else {
+            if (this.r < this.maxR) {
+              this.r++;
+            } else {
+              this.init();
+            }
+          }
+          this.draw();
+        }
+      }
+
+      po.createRain = function() {
+        var rain = new po.Rain();
+        rain.init();
+        rain.draw();
+        po.arrRain.push(rain);
+      }
+
+      po.excute = function(num) {
+        for (var i = 0; i < num; i++) {
+          setTimeout(po.createRain, 500 * i);
+        }
+      }
+
+      po.excute(30);
+
+      setInterval(function() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        for (var item of po.arrRain) {
+          item.move();
+        }
+      }, 1000 / 60)
+    </script>
+  </body>
+</html>
