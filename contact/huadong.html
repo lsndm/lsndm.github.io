@@ -149,9 +149,9 @@
         var index = $(this).index();
         $(".accordion-li").each(function(i, element) {
           if (i > index) {
-            $(this).css({left: arrLi[i] + 206.75 + "px"});
+            $(this).css({"left": arrLi[i] + 206.75 + "px", "transition": ".5s"});
           } else {
-            $(this).css({left: arrLi[i] - 200 + "px"});
+            $(this).css({"left": arrLi[i] - 200 + "px", "transition": ".5s"});
           }
           // if(i==index){
           // $(this).css({left: arrLi[i]-179 + "px"})
@@ -174,7 +174,7 @@
       }, function() {
         var index = $(this).index();
         $(".accordion-li").each(function(i, element) {
-          $(this).css({left: arrLi[i] + "px"});
+          $(this).css({"left": arrLi[i] + "px", "transition": ".5s"});
         })
       })
     </script>
