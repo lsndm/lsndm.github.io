@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>滑动手风琴</title>
+    <link rel="stylesheet" href="../public/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style>
+      body {
+        margin: 0;
+        background: #f2f2f2;
+      }
+      .container {
+        padding: 0 15px;
+        margin: 0 auto;
+        height: 482px;
+      }
+      .container ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      .container .accordion {
+        position: relative;
+        height: 482px;
+        overflow: hidden;
+      }
+      .container .accordion .accordion-li {
+        border-left: 1px solid #fff;
+        width: 154.571px;
+        float: left;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 1.5s;
+      }
+      /*.container .accordion .accordion-li::before {
+        content: "";
+        width: 100%;
+        height: 48%;
+        position: absolute;
+        top: 126px;
+        left: 0;
+        background: red;
+        transition: all .5s;
+      }*/
+      .container .accordion .accordion-li .accordion-icon {
+        width: 100%;
+        height: 235.25px;
+        background: rgba(255, 255, 255, .5);
+        transition: all .5s;
+        transform: translateY(-360px);
+      }
+      .container .accordion .accordion-li .accordion-icon i{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        font-size: 40px;
+        text-align: center;
+        line-height: 235.25px;
+        text-shadow: green 0px 0px 1px;
+        transition: all .5s;
+      }
+      .container .accordion .accordion-li:hover .accordion-icon i {
+        display: none;
+      }
+      .container .accordion .accordion-li:hover .accordion-icon {
+        height: 358px;
+        width: 642px;
+        background: rgba(255, 255, 255, 0);
+        margin: 124px auto 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <ul class="accordion">
+        <li class="accordion-li">
+          <img src="../public/images/huadong//1.jpg" width="642" height="482" />
+          <div class="accordion-icon">
+            <i class="fa fa-plane"></i>
+          </div>
+        </li>
+        <li class="accordion-li">
+          <img src="../public/images/huadong//2.jpg" width="642" height="482" />
+          <div class="accordion-icon">
+            <i class="fa fa-dashboard"></i>
+          </div>
+        </li>
+        <li class="accordion-li">
+          <img src="../public/images/huadong//3.jpg" width="642" height="482" />
+          <div class="accordion-icon">
+            <i class="fa fa-globe"></i>
+          </div>
+        </li>
+        <li class="accordion-li">
+          <img src="../public/images/huadong//4.jpg" width="642" height="482" />
+          <div class="accordion-icon">
+            <i class="fa fa-tasks"></i>
+          </div>
+        </li>
+        <li class="accordion-li">
+          <img src="../public/images/huadong//5.jpg" width="642" height="482" />
+          <div class="accordion-icon">
+            <i class="fa fa-rss-square"></i>
+          </div>
+        </li>
+        <li class="accordion-li">
+          <img src="../public/images/huadong//6.jpg" width="642" height="482" />
+          <div class="accordion-icon">
+            <i class="fa fa-th-large"></i>
+          </div>
+        </li>
+        <li class="accordion-li">
+          <img src="../public/images/huadong//7.jpg" width="642" height="482" />
+          <div class="accordion-icon">
+            <i class="fa fa-windows"></i>
+          </div>
+        </li>
+        <li class="accordion-li">
+          <img src="../public/images/huadong//8.jpg" width="642" height="482" />
+          <div class="accordion-icon">
+            <i class="fa fa-apple"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      // var arrLi = [];
+      $(".accordion-li").each(function(index, element) {
+        $(this).css("width", 235.25 + "px");
+        // arrLi.push(index * 235.25);
+      })
+      $(".accordion-li").hover(function() {
+        var index = $(this).index();
+        $(".accordion-li").each(function(i, element) {
+          if (i == index) {
+            $(this).css({"width": 700 + "px", "transition": ".5s"});
+          } else {
+            $(this).css({"width": 154.571 + "px", "transition": ".5s"});
+          }
+        })
+      }, function() {
+        $(".accordion-li").each(function(i, element) {
+          $(this).css({"width": 235.25 + "px", "transition": ".5s"});
+        })
+      })
+    </script>
+  </body>
+</html>
