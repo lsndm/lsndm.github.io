@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="stylesheet" href="../public/font-awesome-4.7.0/css/font-awesome.min.css">
+    <title>天猫</title>
+    <style>
+      body {
+        margin: 0;
+        background: #d90293;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 14px;
+      }
+      .nav-content {
+        margin: 165px 0 0 322px;
+        width: 200px;
+        height: 536px;
+      }
+      .nav-tab {
+        height: 36px;
+        background-color: #c60a0a;
+      }
+      .nav-tab li {
+        width: 100px;
+        float: left;
+        text-align: center;
+        line-height: 36px;
+        color: #fff;
+      }
+      .nav-tab li.selected {
+        color: #DD2727;
+        background-color: rgba(238,238,238,.95);
+      }
+      .nav-list {
+        height: 500px;
+        background-color: rgba(0, 0, 0, .55);
+      }
+      .nav-list .li-item {
+        height: 31.25px;
+        line-height: 31.25px;
+        font-size: 14px;
+        overflow: hidden;
+      }
+      .nav-list .li-item i {
+        margin: 0 4px 0 14px;
+        width: 16px;
+        height: 31px;
+        line-height: 31px;
+        text-align: center;
+        color: rgba(255, 255, 255, .5);
+      }
+      .nav-list .li-item:hover, .nav-list .li-item:hover i, .nav-list .li-item:hover a {
+        background-color: #fff;
+        color: red;
+      }
+      .nav-list.nav-li {
+        padding-top: 30px;
+        height: 500px;
+        box-sizing: border-box;
+      }
+      .nav-list.nav-li .nav-item {
+        height: 42px;
+        line-height: 42px;
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 3px;
+        overflow: hidden;
+      }
+      .nav-list.nav-li .nav-item span {
+        display: inline-block;
+        border: 1px solid red;
+        width: 150px;
+        height: 30px;
+        border-radius: 12px;
+        line-height: 30px;
+      }
+      .nav-list.nav-li .nav-item span i {
+        margin-left: -6px;
+        margin-right: 6px;
+        width: 16px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        color: rgba(255, 255, 255, .5);
+      }
+      .nav-list.nav-li .nav-item:hover span {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+        <div class="nav-content">
+            <ul class="nav-tab">
+                <li class="selected">商品分类</li>
+                <li>520亲子节</li>
+            </ul>
+            <ul class="nav-list" style="display: block;">
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">女装 /内衣</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-dashboard"></i>
+                    <a href="/">男装 /运动户外</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-globe"></i>
+                    <a href="/">女鞋 /男鞋 /箱包</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-tasks"></i>
+                    <a href="/">美妆 /个人护理</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">腕表 /眼镜 /珠宝饰品</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">手机 /数码 /电脑办公</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">母婴玩具</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">零食 /茶酒 /进口食品</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">生鲜水果</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">大家电 /生活电器</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">家具建材</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">汽车 /配件 /用品</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">家纺 /家饰 /鲜花</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">医药保健</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">厨具 /收纳 /宠物</a>
+                </li>
+                <li class="li-item">
+                    <i class="fa fa-plane"></i>
+                    <a href="/">图书音像</a>
+                </li>
+            </ul>
+            <ul class="nav-list nav-li" style="display: none;">
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span>
+                        <i class="fa fa-plane"></i>
+                        <a href="/">服装服饰</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(".nav-tab > li").hover(
+            function() {
+                var index = $(this).index();
+                $(".nav-tab > li").removeClass("selected");
+                $(this).addClass("selected");
+                $(".nav-tab").nextAll().css("display", "none");
+                $($(".nav-tab").nextAll()[index]).css("display", "block");
+            }, 
+            function() {
+
+            });
+    </script>
+  </body>
+</html>
