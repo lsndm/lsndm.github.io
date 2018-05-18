@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>聊天气泡</title>
+    <style>
+      body {
+        background: #f2f2f2;
+        margin: 0;
+      }
+      .left {
+        position: relative;
+        padding: 0 15px;
+        margin: 10px auto;
+      }
+      .left i {
+        border-bottom: 10px solid #fff;
+        width: 28px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        top: -15px;
+      }
+      /*i::before {
+        content:'';
+        background:#fff;
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        margin:25px 0 0 12px;
+        border-radius: 40px;
+      }*/
+      .left span {
+        background: #fff;
+        /*position: absolute;
+        top: 12px;
+        left: 33px;*/
+        display: inline-block;
+        margin: 0 0 0 15px;
+        text-align: left;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        max-width: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="left">
+      <i></i>
+      <span>在吗？</span>
+    </div>
+    <div class="left">
+      <i></i>
+      <span>嗯</span>
+    </div>
+    <div class="left">
+      <i></i>
+      <span>哈哈</span>
+    </div>
+    <div class="left">
+      <i></i>
+      <span>床前明月光，疑是地上霜。举头望明月，低头思故乡。</span>
+    </div>
+    <div class="left">
+      <i></i>
+      <span>李白</span>
+    </div>
+  </body>
+</html>
