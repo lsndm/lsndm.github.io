@@ -36,28 +36,7 @@
 </div>
 <main class="main">
     <div class="container">
-        <div class="row">
-            <!--<div class="col-xs-12 col-md-6"><img class="img-icon" style="width: 531px; height: 332px;" src="./public/images/功夫熊猫.jpg" alt="刹那芳华"></div>-->
-            <!--<div class="col-xs-12 col-md-6"><img class="img-icon" style="width: 531px; height: 332px;" src="./public/images/功夫熊猫.jpg" alt="刹那芳华"></div>-->
-			{% for post in site.posts %}
-            <div class="col-xs-12 col-md-6">
-                <article class="post tag-foreign-website tag-bootstrap-v3 tag-opensource-project">
-                    <h2 class="post-title">
-                        <a href="{{ post.url }}">{{ post.title }}</a>
-                    </h2>
-                    <div class="post-featured-image">
-                        <a class="thumbnail loaded" href="http://pearsearch.org/">
-                            <img src="../public/images/logo.jpg" width="700" height="438">
-                        </a>
-                    </div>
-                </article>
-            </div>
-			{% endfor %}
-        </div>
-        <nav class="pagination">
-            <span class="page-number">第 1 页/共 89 页</span>
-            <a class="older-posts" href="/page/2/">下一页 →</a>
-        </nav>
+		{{ content }}
     </div>
     </div>
 </main>

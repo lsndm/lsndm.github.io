@@ -1,0 +1,40 @@
+---
+# You don't need to edit this file, it's empty on purpose.
+# Edit theme's home layout instead if you wanna make some changes
+# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+layout: home
+---
+
+<div class="row">
+            <!--<div class="col-xs-12 col-md-6"><img class="img-icon" style="width: 531px; height: 332px;" src="./public/images/功夫熊猫.jpg" alt="刹那芳华"></div>-->
+            <!--<div class="col-xs-12 col-md-6"><img class="img-icon" style="width: 531px; height: 332px;" src="./public/images/功夫熊猫.jpg" alt="刹那芳华"></div>-->
+	{% for post in paginator.posts %}
+		<div class="col-xs-12 col-md-6">
+			<article class="post tag-foreign-website tag-bootstrap-v3 tag-opensource-project">
+				<h2 class="post-title">
+					<a href="{{ post.url }}">{{ post.title }}</a>
+				</h2>
+				<div class="post-featured-image">
+					<a class="thumbnail loaded" href="{{ post.url }}">
+						<img src="../public/images/logo.jpg" style="height: 300px; width: 100%;" />
+					</a>
+				</div>
+			</article>
+		</div>
+	{% endfor %}
+</div>
+{% if paginator.total_pages > 1 %}
+	<nav class="pagination">
+		{% if paginator.previous_page %}
+			{% if paginator.previous_page == 1 %}
+				<a href="/" class="newer-posts">← 上一页</a>
+				{% else %}
+				<a href="/page{{ paginator.previous_page }}" class="newer-posts">← 上一页</a>
+			{% endif %}
+		{% endif %}
+		<span class="page-number">第 {{ paginator.page }} 页/共 {{ paginator.total_pages }} 页</span>
+		{% if paginator.next_page %}
+			<a href="/page{{ paginator.next_page }}" class="older-posts">下一页 →</a>
+	    {% endif %}
+	</nav>
+{% endif %}

@@ -28,6 +28,10 @@ theme: minima
 plugins:
   - jekyll-feed
 encoding: utf-8
+paginate: 6
+paginate_path: /page:num
+permalink: /article/:title.html
+plugins: [jekyll-paginate]
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

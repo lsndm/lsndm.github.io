@@ -166,6 +166,10 @@ a {
     border-radius: 4px;
 }
 
+.pagination > a.newer-posts {
+    left: 10px;
+}
+
 .pagination > a.older-posts {
     right: 10px;
 }
