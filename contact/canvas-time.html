@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>canvas绘制粒子时间</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .page-content {
+        padding: 0 15px;
+        margin: 50px auto 0;
+      }
+      #myCanvas {
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-content">
+      <canvas id="myCanvas" width="920" height="100"></canvas>
+    </div>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      var digit =
+                [
+                    [
+                        [0,0,1,1,1,0,0],
+                        [0,1,1,0,1,1,0],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [0,1,1,0,1,1,0],
+                        [0,0,1,1,1,0,0]
+                    ],//0
+                    [
+                        [0,0,0,1,1,0,0],
+                        [0,1,1,1,1,0,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,0,1,1,0,0],
+                        [1,1,1,1,1,1,1]
+                    ],//1
+                    [
+                        [0,1,1,1,1,1,0],
+                        [1,1,0,0,0,1,1],
+                        [0,0,0,0,0,1,1],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,1,1,0,0,0],
+                        [0,1,1,0,0,0,0],
+                        [1,1,0,0,0,0,0],
+                        [1,1,0,0,0,1,1],
+                        [1,1,1,1,1,1,1]
+                    ],//2
+                    [
+                        [1,1,1,1,1,1,1],
+                        [0,0,0,0,0,1,1],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,1,1,1,0,0],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,0,0,1,1],
+                        [0,0,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [0,1,1,1,1,1,0]
+                    ],//3
+                    [
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,1,1,1,0],
+                        [0,0,1,1,1,1,0],
+                        [0,1,1,0,1,1,0],
+                        [1,1,0,0,1,1,0],
+                        [1,1,1,1,1,1,1],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,1,1,1,1]
+                    ],//4
+                    [
+                        [1,1,1,1,1,1,1],
+                        [1,1,0,0,0,0,0],
+                        [1,1,0,0,0,0,0],
+                        [1,1,1,1,1,1,0],
+                        [0,0,0,0,0,1,1],
+                        [0,0,0,0,0,1,1],
+                        [0,0,0,0,0,1,1],
+                        [0,0,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [0,1,1,1,1,1,0]
+                    ],//5
+                    [
+                        [0,0,0,0,1,1,0],
+                        [0,0,1,1,0,0,0],
+                        [0,1,1,0,0,0,0],
+                        [1,1,0,0,0,0,0],
+                        [1,1,0,1,1,1,0],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [0,1,1,1,1,1,0]
+                    ],//6
+                    [
+                        [1,1,1,1,1,1,1],
+                        [1,1,0,0,0,1,1],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,0,1,1,0,0],
+                        [0,0,1,1,0,0,0],
+                        [0,0,1,1,0,0,0],
+                        [0,0,1,1,0,0,0],
+                        [0,0,1,1,0,0,0]
+                    ],//7
+                    [
+                        [0,1,1,1,1,1,0],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [0,1,1,1,1,1,0],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [0,1,1,1,1,1,0]
+                    ],//8
+                    [
+                        [0,1,1,1,1,1,0],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [1,1,0,0,0,1,1],
+                        [0,1,1,1,0,1,1],
+                        [0,0,0,0,0,1,1],
+                        [0,0,0,0,0,1,1],
+                        [0,0,0,0,1,1,0],
+                        [0,0,0,1,1,0,0],
+                        [0,1,1,0,0,0,0]
+                    ],//9
+                    [
+                        [0,0,0,0],
+                        [0,0,0,0],
+                        [0,1,1,0],
+                        [0,1,1,0],
+                        [0,0,0,0],
+                        [0,0,0,0],
+                        [0,1,1,0],
+                        [0,1,1,0],
+                        [0,0,0,0],
+                        [0,0,0,0]
+                    ]//:
+                ];
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      var canvasHeight = $("#myCanvas").height();
+      var Clock = function() {
+      }
+      Clock.prototype = {
+        init: function(x, y, offset) {
+          this.x = x;
+          this.y = y;
+          this.r = (canvasHeight / 20) - 1;
+          this.color = "blue";
+          this.offset = offset * 2 * 8 * (canvasHeight / 20);
+        },
+        // draw: function() {
+        //   ctx.fillStyle = this.color;
+        //   ctx.beginPath();
+        //   ctx.arc(this.x + this.offset, this.y, this.r, 0, 2 * Math.PI);
+        //   ctx.closePath();
+        //   ctx.fill();
+        // },
+        draw: function(i, num) {
+          for (var j = 0; j < digit[i].length; j++) {
+            for (var k = 0; k < digit[i][j].length; k++) {
+              if (digit[i][j][k] == 1) {
+                this.init((k * 2 + 1) * (canvasHeight / 20), (j * 2  + 1) * (canvasHeight / 20), num);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x + this.offset, this.y, this.r, 0, 2 * Math.PI);
+                ctx.closePath();
+                ctx.fill();
+              }
+            }
+          }
+        },
+        getTime: function() {
+          var data = [];
+          var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+          data.push(temp[1], temp[2], 10, temp[3], temp[4], 10, temp[5], temp[6]);
+          canvas.height = 100;
+          for (var i = 0; i < data.length; i++) {
+            this.draw(data[i], i);
+          }
+        }
+      };
+
+      var timer = new Clock();
+
+      clearInterval(oTime);
+      var oTime = setInterval(function() {
+        timer.getTime();
+      }, 0);
+
+      // var createTimer = function(x, y, offset) {
+      //   var timer = new Clock();
+      //   timer.init(x, y, offset);
+      //   timer.draw();
+      // }
+
+      // for (var i = 0; i < digit.length; i++) {
+      //   for (var j = 0; j < digit[i].length; j++) {
+      //     for (var k = 0; k < digit[i][j].length; k++) {
+      //       if (digit[i][j][k] == 1) {
+      //         createTimer((k * 2 + 1) * (canvasHeight / 20), (j * 2  + 1) * (canvasHeight / 20), i);
+      //       }
+      //     }
+      //   }
+      // }
+    </script>
+  </body>
+</html>
