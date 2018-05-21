@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linux基本命令"
+title: "Linux"
 date: 2018-04-02 10:55:50 +0800
 comments: true
 categories: [linux]
