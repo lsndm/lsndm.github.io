@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文件拖拽上传</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .page-content {
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .wrapper {
+            max-width: -webkit-calc(800px - (30px * 2));
+            max-width: calc(800px - (30px * 2));
+            height: 500px;
+            padding: 30px 30px;
+            margin: 0 auto;
+            background-color: #f2f2f2;
+            overflow-y: scroll;
+        }
+        .wrapper h3 {
+            text-align: center;
+        }
+        .wrapper img {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-content">
+        <div class="wrapper">
+            <h3>请拖拽图片到此上传...</h3>
+        </div>
+    </div>
+    <script>
+        var imgContainer = document.querySelector(".wrapper");
+        var drag = function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var eType = e.type;
+            var ele = e.target;
+            switch(eType) {
+                case "dragenter":
+                    if ([...ele.children].length == 1) {
+                        ele.children[0].style.display = "none";
+                    }
+                    break;
+                case "dragover":
+                    break;
+                case "dragleave":
+                    if ([...ele.children].length == 1) {
+                        ele.children[0].style.display = "block";
+                    }
+                    break;
+                case "drop":
+                    var imgFiles = e.dataTransfer.files;
+                    for (var i = 0, file; file = imgFiles[i++];) {
+                        if (file.type.indexOf('image') != -1) {
+                            var fileRead = new FileReader();
+                            fileRead.readAsDataURL(file);
+                            fileRead.onload = function() {
+                                var oImg = new Image();
+                                oImg.src = this.result;
+                                ele.appendChild(oImg);
+                            }
+                        } else {
+                            alert("请选择图片上传！");
+                        }
+                    }
+                    break;
+            }
+        }
+        imgContainer.addEventListener("dragenter", drag, false);
+        imgContainer.addEventListener("dragover", drag, false);
+        imgContainer.addEventListener("dragleave", drag, false);
+        imgContainer.addEventListener("drop", drag, false);
+    </script>
+</body>
+</html>

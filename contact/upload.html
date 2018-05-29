@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>图片上传</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: #f2f2f2;
+      }
+
+      .page-content {
+        margin: 50px auto 0;
+        padding: 0 15px;
+      }
+
+      .wrapper {
+          max-width: -webkit-calc(800px - (30px * 2));
+          max-width: calc(800px - (30px * 2));
+          padding: 30px 30px;
+          margin: 0 auto;
+      }
+
+      .myForm-group {
+          margin-right: auto;
+          margin-left: auto;
+          display: table;
+          margin-bottom: 15px;
+      }
+
+      .myForm-group .myForm-label {
+          display: table-cell;
+          vertical-align: middle;
+      }
+
+      .myForm-group .myForm-control {
+          display: table-cell;
+          height: 34px;
+          padding: 6px 12px;
+          font-size: 14px;
+          line-height: 1.42857143;
+          color: #555;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+      }
+
+      .myForm-group .myForm-control.pic {
+          border: none;
+          background-color: transparent;
+      }
+
+      input {
+          width: 255px;
+          height: 40px;
+          padding: 6px 12px;
+      }
+
+      input[type="text"] {
+        /*margin-bottom: 20px;*/
+        border-radius: 5px;
+        border: 1px solid;
+        text-indent: 5px;
+        font-size: 16px;
+      }
+
+      .img-icon {
+          height: 80px;
+          width: 80px;
+          font-size: 16px;
+          line-height: 100px;
+          display: block;
+          color: #0E2D5F;
+          text-align: center;
+          cursor: pointer;
+          border-radius: 15%;
+          border: 1px solid #cdbfe3;
+          overflow: hidden;
+          background-color: #fff;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="page-content">
+      <div class="wrapper">
+        <form method=POST enctype=multipart/form-data action="http://localhost:8080/dali/upload">
+          <!-- <div class="myForm-group">
+              <div class="myForm-row">
+                <label class="myForm-label">姓名：</label>
+                <input class="myForm-control" name="name" type="text" placeholder="" />
+              </div>
+          </div> -->
+          <div class="myForm-group">
+                <!-- <label class="myForm-label">姓名：</label> -->
+              <div class="myForm-control pic">
+                  <input name="file" type="file" style="display: none;" />
+                  <span class="img-icon">
+                      <img id="img-change" src="./image/add_goods_button.png" width="50" height="80" />
+                  </span>
+              </div>
+              <!-- <div class="myForm-control pic">
+                  <input name="file" type="file" style="display: none;" />
+                  <span class="img-icon">
+                      <img id="img-change" src="./image/add_goods_button.png" width="50" height="80" />
+                  </span>
+              </div>
+              <div class="myForm-control pic">
+                  <input name="file" type="file" style="display: none;" />
+                  <span class="img-icon">
+                      <img id="img-change" src="./image/add_goods_button.png" width="50" height="80" />
+                  </span>
+              </div> -->
+          </div>
+          <!-- <div class="myForm-group">
+              <input name="file" type="file" style="display: none;" />
+              <span class="img-icon">
+                  <img id="img-change" src="./image/add_goods_button.png" width="50" height="80" />
+              </span>
+          </div> -->
+          <div class="myForm-group">
+              <input class="myForm-control" type="text" name="dwdm" placeholder="请输入单位代码" />
+          </div>
+          <div class="myForm-group">
+              <input class="myForm-control" type="text" name="cjbh" placeholder="请输入接处警编号" />
+          </div>
+          <div class="myForm-group">
+              <input id="btn" type="button" value="上传" />
+          </div>
+          <div class="myForm-group">
+              <input type="submit" value="提交" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+
+      $("input[name='file']").each(function(index, element) {
+          $(this).change(function(event) {
+              // $(this).next(".img-icon").children("img:first-child").attr("src", $(this).val());
+              filechange(event, $(this));
+          })
+      });
+
+      $(".img-icon").each(function(index, element) {
+          $(this).click(function () {
+              $(this).prev().click();
+          })
+      });
+
+      var filechange = function(event, $this) {
+          var files = event.target.files, file;
+          if (files && files.length > 0) {
+              // 获取目前上传的文件
+              file = files[0];// 文件大小校验的动作
+              if(file.size > 1024 * 1024 * 2) {
+                  alert('图片大小不能超过 2MB!');
+                  return false;
+              }
+              // 获取 window 的 URL 工具
+              var URL = window.URL || window.webkitURL;
+              // 通过 file 生成目标 url
+              var imgURL = URL.createObjectURL(file);
+              //用attr将img的src属性改成获得的url
+              $this.next(".img-icon").children().attr("src", imgURL);
+              $this.next(".img-icon").children().css({"width" : "80px", "height" : "80px"});
+              // 使用下面这句可以在内存中释放对此 url 的伺服，跑了之后那个 URL 就无效了
+              // URL.revokeObjectURL(imgURL);
+          }
+      };
+
+      $("#btn").click(function () {
+          // $.ajaxFileUpload({
+          //     url: '/imgUpload',
+          //     fileElementId:'file',
+          //     dataType:'txt',
+          //     secureuri : false,
+          //     success: function (data){
+          //         if(data=="yes"){
+          //             $("#img-alert").css("display","block");
+          //         }
+          //     },
+          //     error:function(data,status,e){
+          //         alert(e);
+          //     }
+          // });
+          // $.ajax({
+          //   url: "http://localhost:8080/dali/upload",
+          //   type: "POST",
+          //   data: "name=John&location=Boston",
+          //   dataType: "json",
+          //   success: function(msg){
+          //     alert( "Data Saved: " + msg );
+          //   }
+          // });
+      });
+    </script>
+  </body>
+</html>
