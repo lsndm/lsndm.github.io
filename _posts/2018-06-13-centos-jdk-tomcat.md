@@ -53,7 +53,7 @@ categories: [linux, jdk, tomcat]
 	               redirectPort="8443" URIEncoding="UTF-8" />
 	    (4)启动tomcat:
 	    	shell> /tomcat/apache-tomcat-7.0.79/bin/startup.sh
-	    (5)在浏览器输入http://ip:8080测试tomcat是否可以成功访问
+	    (5)在浏览器输入http://ip测试tomcat是否可以成功访问
 
 ***
 
