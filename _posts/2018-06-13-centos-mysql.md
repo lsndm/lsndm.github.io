@@ -6,7 +6,11 @@ comments: true
 categories: [linux, mysql]
 ---
 
+JDK下载地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
+MySQL5.7下载地址及依赖下载地址：http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/
+
+centos 7相关软件下载地址：http://mirror.centos.org/centos-7/7/os/x86_64/Packages/
 
 此安装方法适用于centos 7以下版本
 ===================================
