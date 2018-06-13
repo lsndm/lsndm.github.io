@@ -68,3 +68,13 @@ mysql开启自启动     | ~~cp /usr/local/mysql/support-files/mysql.server /etc
 在线安装方式        |  yum install -y 软件名     |  yum install -y 软件名   |  sudo apt-get install 软件名  |
 离线安装方式        |  rpm -ivh \*\*\*.rpm      |  rpm -ivh \*\*\*.rpm      |  sudo dpkg -i \*\*\*.deb  |  
 查询是否安装        |  rpm -qa \| grep mysql     |  rpm -qa \| grep mysql     |  dpkg -l \| grep mysql   |
+
+
+Linux上MySQL无法创建进程
+===============================
+
+`sudo mkdir /var/run/mysqld`
+
+`sudo chown -R mysql:mysql /var/run/mysqld`
+
+`sudo service mysqld start`
