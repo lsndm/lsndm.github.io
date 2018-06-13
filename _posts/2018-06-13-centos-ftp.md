@@ -6,6 +6,8 @@ comments: true
 categories: [linux, ftp]
 ---
 
+[ftp安装文档](/public/file/centos-ftp.docx)
+
 首先检查是否安装过： `rpm -qa | grep vsftpd`
 如果出现  vsftpd-xxx，那就说明安装了。
 
