@@ -103,8 +103,8 @@
     <div class="main">
         <div class="nav-content">
             <ul class="nav-tab">
-                <li class="selected">商品分类</li>
-                <li>520亲子节</li>
+                <li class="selected"><a href="javascript:void(0);">商品分类</a></li>
+                <li><a href="javascript:void(0);">520亲子节</a></li>
             </ul>
             <ul class="nav-list" style="display: block;">
                 <li class="li-item">
@@ -250,6 +250,25 @@
             function() {
 
             });
+        var nav_tab = document.querySelector('.nav-tab');
+        /**
+        * 可用于onclick事件
+        */
+        var findParent = function(tag, ele) {
+            if (ele === undefined || ele.parentNode.tagName === undefined) {
+                return false;
+            }
+            return ele.parentNode.tagName.toLowerCase() === tag ? ele.parentNode : findParent(tag, ele.parentNode);
+        }
+        var click = function(e) {
+            var tg = e.target;
+            if(findParent("li", e.target)) {
+                var ele = findParent("li", e.target);
+                var index = [].slice.call(ele.parentNode.children).indexOf(ele);
+                console.log(index);
+            }
+        }
+        nav_tab.addEventListener('click', click, false);
     </script>
   </body>
 </html>
