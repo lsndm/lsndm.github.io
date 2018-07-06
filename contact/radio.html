@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>五角星</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <style>
+    body,
+    h1 {
+        margin: 0;
+    }
+
+    body {
+        text-align: center;
+        background-color: #34495e;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    h1 {
+        color: #FFF;
+        font-weight: 500;
+        padding: 30px;
+        text-shadow: 0 3px 3px #2b3c4e;
+    }
+
+    .wrapper {
+        display: inline-block;
+    }
+
+    input {
+        display: none;
+    }
+
+    label {
+        cursor: pointer;
+        font-size: 40px;
+        color: yellow;
+        display: block;
+        width: 50px;
+        height: 50px;
+        line-height: 60px;
+        text-align: center;
+        float: left;
+        transition: all 0.2s;
+    }
+
+    label::before {
+        font-family: FontAwesome;
+        content: "\f005";
+    }
+
+    label:hover {
+        font-size: 50px;
+        color: #FFF;
+        text-shadow: 0 0 5px #b9c9d8;
+    }
+
+    .wrapper:hover label::before {
+        content: "\f005";
+    }
+
+    .wrapper:hover label:hover~label::before {
+        content: "\f006";
+    }
+
+    input:checked+label~label::before {
+        content: "\f006";
+    }
+
+    .slide {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 1150px;
+    }
+
+    .slide span {
+        display: inline-block;
+        width: 55px;
+        height: 5px;
+        background-color: #fff;
+        margin-left: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>Flat pure CSS3 rating system</h1>
+    <div class="wrapper">
+        <input type="radio" id="star1" name="star" />
+        <label for="star1"></label>
+        <input type="radio" id="star2" name="star" />
+        <label for="star2"></label>
+        <input type="radio" id="star3" name="star" checked="checked" />
+        <label for="star3"></label>
+        <input type="radio" id="star4" name="star" />
+        <label for="star4"></label>
+        <input type="radio" id="star5" name="star" />
+        <label for="star5"></label>
+    </div>
+    <div class="slide">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <script>
+    function setCheckedValue(radioName, newValue) {
+        var radios = document.getElementsByName(radioName);
+        for (var i = 0, len = radios.length; i < len; i++) {
+            if (radios[i].value == newValue.toString()) {
+                radios[i].checked = true;
+            }
+        }
+    }
+
+    function getCheckedValue(radioName) {
+        var radios = document.getElementsByName(radioName);
+        for (var i = 0, len = radios.length; i < len; i++) {
+            if (radios[i].checked) {
+                return radios[i].value;
+            }
+        }
+    }
+
+    function getCheckedValues(checkboxName) {
+        var checkboxes = document.getElementsByName(checkboxName);
+        var values = [];
+        for (var i = 0, len = checkboxes.length; i < len; i++) {
+            if (checkboxes[i].checked) {
+                values.push(checkboxes[i].value);
+            }
+        }
+        return values;
+    }
+
+    function setCheckedValues(name, values) {
+        if (values instanceof Array) {
+            var checkboxes = document.getElementsByName(name);
+            for (var i = 0, len = checkboxes.length; i < len; i++) {
+                for (var j = 0, lens = values.length; j < lens; j++) {
+                    if (checkboxes[i].value == values[j]) {
+                        checkboxes[i].checked = true;
+                    }
+                }
+            }
+        }
+    }
+    </script>
+</body>
+
+</html>
