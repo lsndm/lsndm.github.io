@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>网易云音乐轮播图</title>
+        <style>
+            body, ul {
+                margin: 0;
+            }
+            ul {
+                padding-left: 0;
+                list-style-type: none;
+            }
+            img {
+                display: block;
+            }
+            .page-content {
+                padding-right: 15px;
+                padding-left: 15px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .banner {
+                width: 1200px;
+                height: 367px;
+                margin: 80px auto 0;
+            }
+            .imglist {
+                position: relative;
+                width: 1200px;
+                height: 336px;
+                overflow: hidden;
+            }
+            .imglist li {
+                position: absolute;
+                transition: .5s;
+            }
+            .li1 {
+                z-index: 2;
+                transform: scale(.81);
+                transform-origin: 0% 100%;
+            }
+            .li2 {
+                transform: translateX(235px);
+                z-index: 3;
+            }
+            .li3 {
+                transform: translateX(730px) scale(.81);
+                transform-origin: 100% 100%;
+                z-index: 2;
+            }
+            .li4 {
+                transform: translateX(965px) scale(.81);
+                transform-origin: 100% 100%;
+            }
+            .li5 {
+                transform: translateX(1200px) scale(.81);
+                transform-origin: 100% 100%;
+            }
+            .li6 {
+                transform: translateX(1435px) scale(.81);
+                transform-origin: 100% 100%;
+            }
+            .line {
+                width: 1200px;
+                height: 31px;
+                text-align: center;
+            }
+            .line a {
+                display: inline-block;
+                width: 60px;
+                height: 3px;
+                background-color: #ccc;
+                transition: .5s;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-content">
+            <div class="banner">
+                <div class="imglist">
+                    <ul>
+                        <li class="li1 list1"><img src="images/01.jpg" alt="" title="" /></li>
+                        <li class="li2"><img src="images/02.jpg" alt="" title="" /></li>
+                        <li class="li3"><img src="images/03.jpg" alt="" title="" /></li>
+                        <li class="li4"><img src="images/04.jpg" alt="" title="" /></li>
+                        <li class="li5"><img src="images/05.jpg" alt="" title="" /></li>
+                        <li class="li6"><img src="images/06.jpg" alt="" title="" /></li>
+                    </ul>
+                </div>
+                <div class="line">
+                    <a href="javascript:void(0)"></a>
+                    <a href="javascript:void(0)"></a>
+                    <a href="javascript:void(0)"></a>
+                    <a href="javascript:void(0)"></a>
+                    <a href="javascript:void(0)"></a>
+                    <a href="javascript:void(0)"></a>
+                </div>
+            </div>
+        </div>
+        <script>
+            var arrLi = document.querySelectorAll(".imglist li");
+            var aList = document.querySelectorAll(".line a");
+            var _arrLi = [].slice.call(arrLi);
+            var arrName = [];
+            for (var item of arrLi) {
+                arrName.push(item.classList[0]);
+            }
+            // arrLi.forEach(function(item, index) {
+            //     console.log(item);
+            // });
+            // for (var i = 0, item; item = arrLi[i++];) {
+            //     console.log(item);
+            // }
+
+            function lineColor(index) {
+                for (var i = 0, item; item = aList[i++];) {
+                    item.style.backgroundColor = "#ccc";
+                }
+                aList[index].style.backgroundColor = "red";
+            }
+
+            // 默认显示第二张图片
+            lineColor(0);
+            // 所以先执行此向上翻页
+            prevPic();
+
+            var lineIndex = 0;
+
+            var timer1;
+            /**
+            * 向下翻页
+            */
+            function nextPic() {
+                arrName.unshift(arrName[5]);
+                arrName.pop();
+                for (var i = 0, item; item = arrLi[i++];) {
+                    // 第一种方式
+                    // item.classList.remove(item.classList[0]);
+                    // item.classList.add(arrName[i-1]);
+                    // 第二种方式
+                    // item.className = arrName[i-1];
+                    // 第三种方式
+                    // item.setAttribute('class',arrName[i-1]);
+                    // 第四种方式, 使用替换的方式，支持class中有多个类名
+                    var cName = item.getAttribute('class');
+                    // var reg = new RegExp(/li\d/,"g");
+                    cName = cName.replace(/li\d/, arrName[i-1]);
+                    item.setAttribute('class', cName);
+                }
+
+                // 第一种方式改变样式
+                var _index = _arrLi.indexOf(document.querySelector(".li2"));
+
+                // _index = _index - 1;
+                // if (_index < 0) {
+                //     _index = 5;
+                // }
+                lineColor(_index);
+
+
+                // 第二种方式改变样式
+                // for (var i = 0, item; item = aList[i++];) {
+                //     item.style.backgroundColor = "#ccc";
+                // }
+
+                // lineIndex++;
+                // if (lineIndex > 5) {
+                //     lineIndex = 0;
+                // }
+                // lineColor(lineIndex);
+
+                window.clearTimeout(timer1);
+                timer1 = setTimeout("nextPic()", 5000);
+            }
+
+            window.clearTimeout(timer2);
+            var timer2 = setTimeout("nextPic()", 5000);
+
+            /**
+            * 向上翻页
+            */
+            function prevPic() {
+                arrName.push(arrName[0]);
+                arrName.shift();
+                for (var i = 0, item; item = arrLi[i++];) {
+                    // 第一种方式
+                    // item.classList.remove(item.classList[0]);
+                    // item.classList.add(arrName[i-1]);
+                    // 第二种方式
+                    // item.className = arrName[i-1];
+                    // 第三种方式
+                    // item.setAttribute('class',arrName[i-1]);
+                    // 第四种方式
+                    var cName = item.getAttribute('class');
+                    // var reg = new RegExp(/li\d/,"g");
+                    cName = cName.replace(/li\d/, arrName[i-1]);
+                    item.setAttribute('class', cName);
+                }
+                var _index = _arrLi.indexOf(document.querySelector(".li2"));
+
+                lineColor(_index);
+            }
+
+            document.addEventListener("mousedown", function(event) {
+                var eleName = event.target.parentNode.classList[0];
+                if (eleName === "li1") {
+                    prevPic();
+                }
+                if (eleName === "li3") {
+                    nextPic();
+                }
+            })
+
+        </script>
+    </body>
+</html>
