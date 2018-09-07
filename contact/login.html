@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>登录</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        body {
+            background-color: #f5f6f8;
+        }
+        .page-content {
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .login {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            width: 299px;
+            height: 350px;
+            padding: 20px;
+            margin: auto;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 2px;
+        }
+        .login-title {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            color: rgba(18, 17, 17, 0.7);
+        }
+        .login-wrap {
+            width: 100%;
+            height: 211px;
+        }
+        input[name="user"] {
+            background-image: url("yonghu.jpg");
+            background-repeat: no-repeat;
+            background-size: 43px;
+        }
+        input[name="pwd"] {
+            background-image: url("mima.jpg");
+            background-repeat: no-repeat;
+            background-size: 43px;
+        }
+        input[name="user"], input[name="pwd"] {
+            width: 255px;
+            height: 40px;
+            margin-bottom: 20px;
+            padding-left: 45px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            /*text-indent: 45px;*/
+            font-size: 16px;
+            box-sizing: border-box;
+            /*box-shadow: 0px 0px 5px 1px #0d6b8a;*/
+            transition: .5s;
+        }
+        input[type="button"] {
+            width: 255px;
+            height: 44px;
+        }
+        .line {
+            position: relative;
+            text-align: center;
+        }
+        .line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            margin-top: -1px;
+            border-bottom: 1px solid #e4e7ed;
+            z-index: -1;
+        }
+        .login-split {
+            padding: 0 10px;
+            background: #fff;
+            color: #9ba3af;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-content">
+        <div class="login">
+            <span class="login-title">用户登录</span>
+            <div class="login-wrap">
+                <div class="form-wrap">
+                    <form action="">
+                        <input class="dis" name="user" type="text" placeholder="请输入用户名" />
+                        <input class="dis" name="pwd" type="password" placeholder="请输入密码" />
+                        <input class="dis" type="button" value="登录" />
+                    </form>
+                </div>
+            </div>
+            <div class="line"><span class="login-split">或使用以下账号登录</span></div>
+        </div>
+    </div>
+</body>
+</html>
