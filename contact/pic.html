@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <title>图片查看</title>
+    <style>
+        body, ul {
+            margin: 0;
+        }
+        ul {
+            padding-left: 0;
+            list-style-type: none;
+        }
+        img {
+            display: block;
+        }
+        .page-content {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .banner {
+            width: 1200px;
+            height: 367px;
+            margin: 80px auto 0;
+        }
+        .imglist {
+            position: relative;
+            width: 1200px;
+            height: 336px;
+            overflow: hidden;
+        }
+        .imglist li {
+            position: absolute;
+            top: 0;
+        }
+        .leftButton {
+            position: absolute;
+            left: 30px;
+            top: 150px;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            border-right: 40px solid #fff;
+            border-top: 40px solid transparent;
+            border-bottom: 40px solid transparent;
+        }
+        .leftButton:hover {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+        .rightButton {
+            position: absolute;
+            right: 30px;
+            top: 150px;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            border-left: 40px solid #fff;
+            border-top: 40px solid transparent;
+            border-bottom: 40px solid transparent;
+        }
+        .rightButton:hover {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-content">
+        <div class="banner">
+            <div class="imglist">
+                <ul>
+                    <li class="li1"><img src="../public/images/huadong/1.jpg" alt="" title="" /></li>
+                    <li class="li2"><img src="../public/images/huadong/2.jpg" alt="" title="" /></li>
+                    <li class="li3"><img src="../public/images/huadong/3.jpg" alt="" title="" /></li>
+                    <li class="li4"><img src="../public/images/huadong/4.jpg" alt="" title="" /></li>
+                    <li class="li5"><img src="../public/images/huadong/5.jpg" alt="" title="" /></li>
+                    <li class="li6"><img src="../public/images/huadong/6.jpg" alt="" title="" /></li>
+                </ul>
+                <div class="leftButton">
+                </div>
+                <div class="rightButton">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        //解决IE8之类不支持getElementsByClassName
+        if (!document.getElementsByClassName) {
+            document.getElementsByClassName = function (className, element) {
+                var children = (element || document).getElementsByTagName('*');
+                var elements = new Array();
+                for (var i = 0; i < children.length; i++) {
+                    var child = children[i];
+                    var classNames = child.className.split(' ');
+                    for (var j = 0; j < classNames.length; j++) {
+                        if (classNames[j] == className) {
+                            elements.push(child);
+                            break;
+                        }
+                    }
+                }
+                return elements;
+            };
+        }
+        var leftButton = document.getElementsByClassName("leftButton")[0];
+        var rightButton = document.getElementsByClassName("rightButton")[0];
+        var imgs = document.getElementsByClassName("imglist")[0];
+        var ul = imgs.children[0];
+        var imlist, imlistLen;
+        // 如果页面的li元素是静态的则直接使用，如果是动态生成的，请注释下面的两行行代码,
+        // 使用此行代码 imlistLen = 6; 或者 jsp页面可以写成 imlistLent = ${data.size};
+        imlist = imgs.children[0].children;
+        imlistLen = imlist.length;
+
+        if (null == imlistLen || imlistLen == undefined || imlistLen < 2) {
+            leftButton.style.display = "none";
+            rightButton.style.display = "none";
+        }
+
+        /**
+         * 动态创建class样式
+         * 使用方法：loadCssCode('body{background-color:#f00}');
+         **/
+        function loadCssCode(code) {
+            var style = document.createElement('style');
+            style.type = 'text/css';
+            style.rel = 'stylesheet';
+            if (window.attachEvent) {
+                //for IE
+                style.styleSheet.cssText = code;
+            } else if (window.addEventListener) {
+                //for Chrome Firefox Opera Safari
+                style.appendChild(document.createTextNode(code));
+            }
+            var head = document.getElementsByTagName('head')[0];
+            head.appendChild(style);
+        }
+
+        /**
+         * 创建li元素
+         *
+         **/
+        function createLi(n, url) {
+            var li = document.createElement('li');
+            li.className = 'li' + n;
+            var img = document.createElement('img');
+            img.setAttribute('src', url);
+            li.appendChild(img);
+            ul.appendChild(li);
+        }
+
+        // 用于存储li元素的className，便于写翻页函数
+        var arrName = [];
+        // imlist.length可以是后台传过来的size也可以写成固定值，如果页面不需要动态创建li则可以直接使用imlist.length，请根据需求自行调整
+        for (var i = 0, len = imlistLen; i < len; i++) {
+            var n = i + 1;
+            var left = i * 640;
+            loadCssCode('.imglist .li' + n + '{left: ' + left +'px;}');
+            arrName.push('li' + n);
+            // 动态创建li元素
+            // createLi(n, '');
+        }
+        // 动态创建li元素或者页面有li元素后，再获取li元素集合，此集合用于写翻页方法
+        imlist = imgs.children[0].children;
+
+        function nextPic() {
+            var size = imlist.length - 1;
+            arrName.unshift(arrName[size]);
+            arrName.pop();
+            for (var i = 0, item; item = imlist[i++];) {
+                item.className = arrName[i-1];
+            }
+        }
+
+        function prevPic() {
+            arrName.push(arrName[0]);
+            arrName.shift();
+            for (var i = 0, item; item = imlist[i++];) {
+                item.className = arrName[i-1];
+            }
+        }
+
+        if (window.attachEvent) {
+            leftButton.attachEvent("onclick", prevPic);
+            rightButton.attachEvent("onclick", nextPic);
+        } else if (window.addEventListener) {
+            leftButton.addEventListener("click", prevPic, false);
+            rightButton.addEventListener("click", nextPic, false);
+        }
+
+    </script>
+</body>
+</html>
