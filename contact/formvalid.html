@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>表单校验</title>
+    <style>
+        *{
+        margin:0;
+        padding:0;
+    }
+    .content{
+        width:800px;
+        margin:50px auto;
+    }
+    .title{
+        font-size:18px;
+        font-weight:bold;
+        padding-left:340px;
+        margin-bottom:30px;
+    }
+    input{
+        border:1px solid #a9a9a9;
+        height:34px;
+        line-height:34px;
+        width:550px;
+        margin-bottom:20px;
+        padding-left:5px;
+    }
+    label{
+        width:120px;
+        text-align:right;
+        display:inline-block;
+    }
+    #registerBtn{
+        background:#3498db;
+        color:#fff;
+        font-size:14px;
+        text-align:center;
+        width:100px;
+        line-height:34px;
+        border:none 0;
+        cursor:pointer;
+        margin:20px 20px 0 0;
+        margin-left:120px;
+    }
+    label span{
+        color:red;
+    }
+    #errContent{
+        padding:20px 0 0 30px;
+        text-align:center;
+    }
+</style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="title">用户注册</div>
+        <form onsubmit="return false">
+            <div><label><span>*</span>昵称：</label><input onfocus="clearErr()" id="name" type="text" placeholder="只能包含中文、英文、数字和下划线"></div>
+            <div><label><span>*</span>手机：</label><input onfocus="clearErr()" id="phone" type="text" placeholder=""></div>
+            <div><label>邮箱：</label><input onfocus="clearErr()" id="email" type="text"></div>
+            <div><label>身份证号：</label><input onfocus="clearErr()" id="cardCode" type="text"></div>
+            <div><label>毕业学校：</label><input onfocus="clearErr()" id="school" type="text"></div>
+            <div><button id="registerBtn" type="submit">注册</button></div>
+            <div id="errContent"></div>
+        </form>
+    </div>
+    <script>
+    window.onload = function() {
+        var oRegisterBtn = document.getElementById('registerBtn');
+        var oName = document.getElementById('name');
+        var oPhone = document.getElementById('phone');
+        var oEmail = document.getElementById('email');
+        var oCardCode = document.getElementById('cardCode');
+        var oschool = document.getElementById('school');
+        var oErrContent = document.getElementById('errContent');
+
+        oName.addEventListener("blur", function(e) {
+            var ele = e.target;
+            emptyRegister(ele, ele.value)
+        }, false);
+        oPhone.addEventListener("blur", function(e) {
+            var ele = e.target;
+            mobileRegister(ele, ele.value)
+        }, false);
+
+
+        oRegisterBtn.onclick = function() {
+            var doRegister = true;
+            var errStr = "";
+            // if(!mobileRegister(oPhone, oPhone.value)) {
+            //     errStr += "手机号不能为空</br>";
+            //     doRegister = false;
+            // }
+
+            if (!oName.value) {
+                errStr += "用户名不能为空</br>";
+                doRegister = false;
+            } else if (/[^\u4e00-\u9fa5\w]/.test(oName.value)) {
+                errStr += "用户名格式不对" + "</br>";
+                doRegister = false;
+            }
+            if (!oPhone.value) {
+                errStr += "手机号不能为空</br>";
+                doRegister = false;
+            } else if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(oPhone.value)) {
+                errStr += "手机号格式不对</br>";
+                doRegister = false;
+            }
+            if (oEmail.value && !/^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/.test(oEmail.value)) {
+                errStr += "邮箱格式不对</br>";
+                doRegister = false;
+            }
+            if (oCardCode.value && !/[1-9]\d{14}|[1-9]\d{17}|[1-9]\d{16}x/.test(oCardCode.value)) {
+                errStr += "身份证号式不对</br>";
+                doRegister = false;
+            }
+            if (doRegister) {
+                //此处写相应的ajax提交
+                alert("您的资料已提交...");
+            } else {
+                oErrContent.innerHTML = errStr;
+            }
+        }
+    }
+
+    function clearErr() {
+        document.getElementById('errContent').innerHTML = "";
+    }
+
+
+    var mobileRegister = function(element, value) {
+        var len = value.length;
+        var flag = (len == 11 && /^[1][3,4,5,7,8]\d{9}$/.test(value));
+        if (!flag) {
+            element.style.cssText = "border: 1px solid red;";
+        } else {
+            element.style.cssText = "";
+        }
+        return flag;
+    }
+
+    var emptyRegister = function(element, value) {
+        var flag = (typeof(value) === 'undefined' || value === null || value.trim().length === 0);
+        if (flag) {
+            element.style.cssText = "border: 1px solid red;";
+        } else {
+            element.style.cssText = "";
+        }
+        return flag;
+    }
+    </script>
+</body>
+
+</html>
