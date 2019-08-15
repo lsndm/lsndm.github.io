@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>回到顶部</title>
+</head>
+<style>
+.box {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    height: 30px;
+    width: 50px;
+    text-align: center;
+    padding-top: 20px;
+    background-color: lightblue;
+    border-radius: 20%;
+    overflow: hidden;
+}
+
+.box:hover::before {
+    top: 50%
+}
+
+.box:hover .box-in {
+    visibility: hidden;
+}
+
+.box::before {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transition: .5s;
+    transform: translate(-50%, -50%);
+    content: '回到顶部';
+    width: 40px;
+    color: peru;
+    font-weight: bold;
+
+}
+
+.box-in {
+    visibility: visible;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border: 3px solid black;
+    border-color: white transparent transparent white;
+    transform: rotate(45deg);
+}
+</style>
+
+<body style="height:2000px;">
+    <div id="box" class="box">
+        <div class="box-in"></div>
+    </div>
+    <script>
+    ~~function setSize() {
+        // 监听窗口变化
+        // window.onresize = arguments.callee;
+        // 监听滚动条变化
+        window.onscroll = arguments.callee;
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 100) {
+            document.getElementById("box").style.display = "block";
+        } else {
+            document.getElementById("box").style.display = "none";
+        }
+    }()
+    var timer = null;
+    box.onclick = function() {
+        cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function fn() {
+            var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+            if (oTop > 0) {
+                // document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+                // scrollTo(0, oTop-50);
+                scrollBy(0, -50);
+                timer = requestAnimationFrame(fn);
+            } else {
+                cancelAnimationFrame(timer);
+            }
+        });
+    }
+    </script>
+</body>
+
+</html>
